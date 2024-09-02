@@ -18,5 +18,11 @@ jobs:
       - name: Build Docker Image
         run: docker build -t melaniegng/incident-api:${{ github.sha }} .
 
+      - name: Tag Latest
+        run: docker tag melaniegng/incident-api:${{ github.sha }} melaniegng/incident-api:latest
+      
       - name: Push Docker Image
-        run: docker push melaniegng/incident-api:${{ github.sha }}
+        run: |
+          docker push melaniegng/incident-api:${{ github.sha }}
+          docker push melaniegng/incident-api:latest
+      
