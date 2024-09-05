@@ -1,13 +1,16 @@
 #Contenedores configuración
 services:
   #incident-api:
-   # build: .
+   # image: docker pull melaniegng/incident-api:e4fea255f3302076a358927678fd63a50bbff2fc
    # container_name: incident-api
    # ports:
-     # - "3000:3000"
-    #depends_on:
-     # - mongo
- 
+     # -"3000:3000"
+    #eviroment:
+      #MONGO_URL: mongodb://localhost:27017
+      #PORT: 3000
+      #depends_on:
+        #-mongo
+
   mongo:
     image: mongo
     container_name: mongo

@@ -1,5 +1,6 @@
 import {Request, Response} from 'express';
 import { InicidentModel } from '../../../data/models/incident.model';
+import { EmailService } from '../../../../domain/services/email.service';
 
 export class IncidentController{
 
@@ -15,16 +16,25 @@ export class IncidentController{
 
     public createIncident = async (req: Request, res: Response)=>{
         try{
-            const { title, description, lat, lng} = req.body;
+            const { title, descrption, lat, lng} = req.body;
             const newIncident = await InicidentModel.create({
                 title,
-                description,
+                descrption,
                 lat,
                 lng
             });
+           // const emailService = new EmailService();
+            //await emailService.sendEmail({
+             //   to: "lanyng17@gmail.com",
+              //  subject: `Incidente: ${newIncident.title}`,
+               // htmlBody: `<h1>${newIncident.descrption}</h1>`
+          //  });
             res.json(newIncident);
         }
         catch(error){
+            console.error(error)
+
+            
             res.json({message:"Error creando registro"});
         }
     }
@@ -52,6 +62,7 @@ export class IncidentController{
             const updatedIncident = await InicidentModel.findById(id);
             return res.json(updatedIncident);
         } catch (error) {
+            console.error(error)
             return res.json({message:"Ocurrio un error al actualizar el incidente"});
         }
     }

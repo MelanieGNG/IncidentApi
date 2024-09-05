@@ -4,6 +4,7 @@ import { envs } from './config/envs.plugin'
 import { MongoDatabase } from './data/init'
 import { InicidentModel } from './data/models/incident.model';
 import { AppRoutes } from './presentation/route';
+import { emailJob } from '../domain/jobs/email.job';
 
 const app = express();
 app.use(express.json());
@@ -21,6 +22,8 @@ app.get('/', (req,res) => {
 
 app.listen(envs.PORT, () => {
     console.log("Servidor esta corriendo")
+    emailJob();
+
 });
 
 app.post("/", async(req, res) =>{
@@ -33,4 +36,5 @@ app.post("/", async(req, res) =>{
     });
 
     res.send("Registro Creado");
+
 });

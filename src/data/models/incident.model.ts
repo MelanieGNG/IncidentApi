@@ -16,7 +16,13 @@ const incidentSchema = new mongoose.Schema({
     lng:{
         type: Number,
         required: true
+    },
+    isEmailSent:{
+        type: Boolean,
+        default: false
     }
 });
+
+
 
 export const InicidentModel = mongoose.model("Incident", incidentSchema)
